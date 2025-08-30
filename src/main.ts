@@ -35,7 +35,7 @@ async function bootstrap() {
   app.use(helmet());
   app.use(cookieParser());
 
-  const corsOrigin = configService.get('CORS_ORIGIN') || 'http://localhost:3000';
+  const corsOrigin = configService.get('CORS_ORIGIN') || 'http://localhost:3000' || 'https://influence-hub-swart.vercel.app';
   app.enableCors({
     origin: corsOrigin.split(','),
     credentials: true,
