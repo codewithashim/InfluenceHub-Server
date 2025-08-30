@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: influence-hub-backend
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    restart: unless-stopped
+    environment:
+      - CHOKIDAR_USEPOLLING=1
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run start:dev
