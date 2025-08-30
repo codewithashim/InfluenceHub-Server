@@ -13,6 +13,13 @@ enum Role {
   viewer
 }
 
+enum Platform {
+  instagram
+  tiktok
+  youtube
+  x
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -21,3 +28,23 @@ model User {
   createdAt    DateTime @default(now())
 }
 
+
+model Influencer {
+  id             String    @id @default(cuid())
+  name           String
+  platform       Platform
+  username       String
+  followers      Int       @default(0)
+  engagementRate Decimal   @db.Decimal(5,2)
+  country        String?
+  categories     String[]
+  email          String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([platform, username])
+  @@index([followers])
+  @@index([engagementRate])
+  @@index([platform])
+  @@index([country])
+}
